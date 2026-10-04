@@ -12,7 +12,7 @@ const authentication = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, secret);
+    const decoded = jwt.verify(token, secret); //verify token by using the secret key.
     req.user = decoded;
     next();
   } catch (error) {
