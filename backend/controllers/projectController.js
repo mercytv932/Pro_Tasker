@@ -1,9 +1,4 @@
 const Project = require("../models/Project.js");
-const Task = require("../models/Task.js");
-const athentication = require("../middleware/authMiddleware.js");
-const authentication = require("../middleware/authMiddleware.js");
-
-app.use(authentication);
 
 //Get/view all projects
 const getProjects = async (req, res) => {
@@ -36,7 +31,7 @@ const getProject = async (req, res) => {
     const { id } = req.params;
     const project = await Project.findById(id);
     if (project && project.user.equals(req.user._id)) {
-      res.status(200).json(project);
+      return res.status(200).json(project);
     }
     return res.status(403).json({ message: "Couldn't get the project" });
   } catch (error) {
@@ -53,8 +48,9 @@ const updateProject = async (req, res) => {
       const updatedProject = await Project.findByIdAndUpdate(id, req.body, {
         new: true,
       });
-      res.status(200).json(updatedProject);
+      return res.status(200).json(updatedProject);
     }
+    return res.status(403).json({ message: "You don't own this project" });
   } catch (error) {
     res.status(500).json({ message: "Failed to update project" });
   }
