@@ -30,3 +30,21 @@ const createTask = async (req, res) => {
     res.status(500).json({ message: "Failed to create new task " });
   }
 };
+
+//Put/update a task
+const updateTask = async (req, res) => {
+  try {
+    const { taskId } = req.params;
+    const task = await Task.findById(taskId);
+    const project = await Project.findById(task.project); //Find the project that owns this task
+    if (project && project.user.equals(req.user._id)) {
+      const updatedTask = await Task.findByIdAndUpdate(projectId, req.body, {
+        new: true,
+      });
+      res.status(200).json(updatedTask);
+    }
+    return res.status(403).json({ message: "You don't own this project" });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update task" });
+  }
+};
