@@ -1,3 +1,16 @@
+import { useState } from "react";
+const [username, setUsername] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [confrimPassword, setConfirmPassword] = useState("");
+
+function handleSubmit() {
+  const currentUsername = username;
+  const currentEmail = email;
+  const currentPassword = password;
+  const currentConfirmPassword = confrimPassword;
+}
+
 function Register() {
   return (
     <div className="register-page">
