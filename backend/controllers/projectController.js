@@ -1,7 +1,7 @@
 const Project = require("../models/Project.js");
 const Task = require("../models/Task.js");
 
-//Get all projects
+//Get/view all projects
 const getProjects = async (req, res) => {
   try {
     const getAllProjects = await Project.find({
@@ -13,7 +13,7 @@ const getProjects = async (req, res) => {
   }
 };
 
-//Create a new project
+//Post/create a new project
 const postProject = async (req, res) => {
   try {
     const newProject = await Project.create({
@@ -26,7 +26,7 @@ const postProject = async (req, res) => {
   }
 };
 
-//View a single project
+//Get/view a single project
 const getProject = async (req, res) => {
   try {
     const { id } = req.params;
@@ -37,5 +37,21 @@ const getProject = async (req, res) => {
     return res.status(403).json({ message: "Couldn't get the project" });
   } catch (error) {
     res.status(500).json({ message: "Failed to get project" });
+  }
+};
+
+//Put/update project
+const updateProject = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const project = await Project.findById(id);
+    if (project && project.user.equals(req.user._id)) {
+      const updatedProject = await Project.findByIdAndUpdate(id, req.body, {
+        new: true,
+      });
+      res.status(200).json(updatedProject);
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update project" });
   }
 };
