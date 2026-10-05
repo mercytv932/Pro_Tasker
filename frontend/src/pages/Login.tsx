@@ -1,11 +1,11 @@
 function Login() {
   return (
-    <div className="login-page">
-      <div className="email">
+    <div className="login-page email">
+      <div className="input-group email">
         <label htmlFor="email">Email</label>
         <input type="email" />
       </div>
-      <div className="password">
+      <div className="input-group email">
         <label htmlFor="password">Password</label>
         <input type="password" />
       </div>
@@ -14,10 +14,10 @@ function Login() {
         <hr />
         <p>OR</p>
         <hr />
-        <p>
-          Don't have an account? <a href="">Register</a>
-        </p>
       </div>
+      <p>
+        Don't have an account? <a href="">Register</a>
+      </p>
     </div>
   );
 }
