@@ -3,14 +3,23 @@ const [username, setUsername] = useState("");
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [confrimPassword, setConfirmPassword] = useState("");
+const [error, setError] = useState("");
+const [success, setSuccess] = useState("");
+const [isLoading, setIsLoading] = useState(false);
 
+//getting the values from state
 function handleSubmit() {
   const currentUsername = username;
   const currentEmail = email;
   const currentPassword = password;
   const currentConfirmPassword = confrimPassword;
-}
 
+  //check if password matches confirm password
+  if (currentPassword !== currentConfirmPassword) {
+    setError("Password did not match");
+    return;
+  }
+}
 function Register() {
   return (
     <div className="register-page">
