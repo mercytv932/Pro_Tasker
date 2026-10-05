@@ -1,8 +1,11 @@
 const User = require("../models/User.js");
 const jwt = require("jsonwebtoken");
-// Create signToken function
 
+// Create signToken function
 function signToken(user) {
+  if(!process.env.JWT_SECRET){
+    throw new Error("secret key is missing or can't be accessed")
+  }
   return jwt.sign(
     {
       _id: user._id,
