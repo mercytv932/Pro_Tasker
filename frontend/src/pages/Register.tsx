@@ -90,7 +90,13 @@ function Register() {
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
       </div>
-      <button type="submit">Register</button>
+      {error && <p>{error}</p>}
+      {success && <p>{success}</p>}
+
+      {/*disable prevents clicking clicking when request is running*/}
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? "Registering" : "Register"}
+      </button>
 
       <div className="or">
         <hr />
