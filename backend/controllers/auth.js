@@ -61,7 +61,7 @@ const userLogin = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({ message: "Failed to login" });
+    res.status(500).json({ message: "Failed to log in" });
   }
 };
 
