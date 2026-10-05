@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { type SubmitEvent } from "react";
+import { useState, type SubmitEvent } from "react";
 import { loginUser } from "../services/authApi";
 
 const [email, setEmail] = useState("");
@@ -15,7 +14,7 @@ async function handleSubmit(e: SubmitEvent) {
   const currentPassword = password;
 
   if (!email || !password) {
-    setError("Incorrect email or password, try again!");
+    setError("Please enter you email and password");
     return;
   }
 
