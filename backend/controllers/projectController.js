@@ -61,10 +61,15 @@ const deleteProject = async (req, res) => {
   try {
     const { id } = req.params;
     const project = await Project.findById(id);
-    if (project && project.user.equals(req.user._id)) {
+    if (!project) {
+      return res.status(404).json({ message: "Project not found" });
+    } else if (project && project.user.equals(req.user._id)) {
       await Project.findByIdAndDelete(id);
-      res.status(200).json({ message: "Successfully deleted the project" });
+      return res
+        .status(200)
+        .json({ message: "Successfully deleted the project" });
     }
+    return res.status(404).json({ message: "you don't own this project" });
   } catch (error) {
     res.status(500).json({ message: "Failed to delete project" });
   }

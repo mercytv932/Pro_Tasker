@@ -48,3 +48,26 @@ const updateTask = async (req, res) => {
     res.status(500).json({ message: "Failed to update task" });
   }
 };
+
+//Delete a task
+const deleteTask = async (req, res) => {
+  try {
+    const { taskId } = req.params;
+    const task = await Task.findById(taskId);
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    const project = await Project.findById(task.project);
+
+    if (project && project.user.equals(req.user._id)) {
+      await Task.findByIdAndDelete(taskId);
+      return res.status(200).json({ message: "Task successfully delted" });
+    }
+    return res.status(403).json({ message: "You don't own this project" });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to delete task" });
+  }
+};
+
+module.exports = { getTasks, createTask, updateTask, deleteTask };
