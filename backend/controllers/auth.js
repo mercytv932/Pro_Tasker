@@ -47,3 +47,5 @@ const userLogin = async (req, res) => {
     res.status(500).json({ message: "Login failed" });
   }
 };
+
+module.exports = { userSignUp, userLogin };
