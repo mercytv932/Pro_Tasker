@@ -7,3 +7,6 @@ const {
   deleteTask,
 } = require("../controllers/taskController.js");
 
+const authentication = require("../middleware/authMiddleware.js");
+
+router.use(authentication);

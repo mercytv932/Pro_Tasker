@@ -1,5 +1,9 @@
 const Project = require("../models/Project.js");
 const Task = require("../models/Task.js");
+const athentication = require("../middleware/authMiddleware.js");
+const authentication = require("../middleware/authMiddleware.js");
+
+app.use(authentication);
 
 //Get/view all projects
 const getProjects = async (req, res) => {

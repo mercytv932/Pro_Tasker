@@ -8,6 +8,10 @@ const {
   deleteProject,
 } = require("../controllers/projectController.js");
 
+const authentication = require("../middleware/authMiddleware.js");
+
+router.use(authentication);
+
 router.get("/", getProjects); //Get/view all projects
 router.post("/", createProject); //Post/create a new project
 
