@@ -38,10 +38,16 @@ async function handleSubmit(e: SubmitEvent) {
 
 function Login() {
   return (
-    <form className="login-page">
+    <form className="login-page" onSubmit={handleSubmit}>
       <div className="input-group">
         <label htmlFor="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email" />
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
       <div className="input-group">
         <label htmlFor="password">Password</label>
@@ -49,9 +55,15 @@ function Login() {
           type="password"
           id="password"
           placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button>Login</button>
+      {error && <p>{error}</p>}
+      {success && <p>{success}</p>}
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? "Processing" : "Login"}
+      </button>
 
       <div className="or">
         <hr />

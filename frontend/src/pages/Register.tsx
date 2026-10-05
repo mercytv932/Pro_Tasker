@@ -95,7 +95,7 @@ function Register() {
 
       {/*disable prevents clicking clicking when request is running*/}
       <button type="submit" disabled={isLoading}>
-        {isLoading ? "Registering" : "Register"}
+        {isLoading ? "Processing Registration" : "Register"}
       </button>
 
       <div className="or">
