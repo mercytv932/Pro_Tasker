@@ -1,6 +1,44 @@
+import { useState } from "react";
+import { type SubmitEvent } from "react";
+import { loginUser } from "../services/authApi";
+
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [error, setError] = useState("");
+const [success, setSuccess] = useState("");
+const [isLoading, setIsLoading] = useState(false);
+
+async function handleSubmit(e: SubmitEvent) {
+  e.preventDefault();
+
+  const currentEmail = email;
+  const currentPassword = password;
+
+  if (!email || !password) {
+    setError("Incorrect email or password, try again!");
+    return;
+  }
+
+  setIsLoading(true);
+  setError("");
+  setSuccess("");
+
+  try {
+    const data = await loginUser(currentEmail, currentPassword);
+    console.log(data);
+
+    setSuccess("Login successful");
+  } catch (error) {
+    console.error("Login error", error);
+    setError("Login failed");
+  } finally {
+    setIsLoading(false);
+  }
+}
+
 function Login() {
   return (
-    <div className="login-page">
+    <form className="login-page">
       <div className="input-group">
         <label htmlFor="email">Email</label>
         <input type="email" id="email" placeholder="Enter your email" />
@@ -23,7 +61,7 @@ function Login() {
       <p className="auth-switch">
         Don't have an account? <a href="">Register</a>
       </p>
-    </div>
+    </form>
   );
 }
 

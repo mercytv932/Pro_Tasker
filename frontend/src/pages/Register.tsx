@@ -38,7 +38,7 @@ async function handleSubmit(e: SubmitEvent) {
 
     setSuccess("Account created successfully");
   } catch (error) {
-    console.error("registration error:", error);
+    console.error("Registration error:", error);
     setError("Registration failed");
   } finally {
     setIsLoading(false); //loading stops whether no matter the outcome.
