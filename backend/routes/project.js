@@ -12,13 +12,13 @@ const authentication = require("../middleware/authMiddleware.js");
 
 router.use(authentication);
 
-router.get("/", getProjects); //Get/view all projects
-router.post("/", createProject); //Post/create a new project
+router.get("/", getProjects);
+router.post("/", createProject);
 
-router.get("/:id", getProject); //Get/view one project
+router.get("/:id", getProject);
 
-router.put("/:id", updateProject); //Put/update a project
+router.put("/:id", updateProject);
 
-router.delete("/:id", deleteProject); //Delete a project
+router.delete("/:id", deleteProject);
 
 module.exports = router;
