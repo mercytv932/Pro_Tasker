@@ -1,14 +1,79 @@
+/* Login/Register page styles */
+.login-page,
+.register-page {
+  width: 400px;
+  margin: 80px auto;
+  padding: 40px;
+  background: #111827;
+  border: 1px solid #26324a;
+  border-radius: 12px;
+}
 
-/* Login page */
-.login
+/* Input group */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  color: white;
+  font-size: 14px;
+}
+
+.input-group input {
+  padding: 12px;
+  background: #182235;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: white;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #6366f1;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* OR */
 .or {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  margin: 25px 0;
 }
 
 .or hr {
-  width: 50px;
+  flex: 1;
   border: none;
-  border-top: 1px solid #e8e8e8;
+  border-top: 1px solid #334155;
+}
+
+.or p {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+/* authentication switch */
+.auth-switch {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.auth-switch a {
+  color: #818cf8;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
 }
