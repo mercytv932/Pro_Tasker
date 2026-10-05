@@ -8,7 +8,7 @@ const getTasks = async (req, res) => {
     const project = await Project.findById(projectId);
     if (project && project.user.equals(req.user._id)) {
       const getAllTasks = await Task.find({ project: projectId });
-      res.status(200).json(getAllTasks);
+      return res.status(200).json(getAllTasks);
     }
     return res.status(403).json({ message: "You don't own this project" });
   } catch (error) {
@@ -21,9 +21,9 @@ const createTask = async (req, res) => {
   try {
     const { projectId } = req.params;
     const project = await Project.findById(projectId);
-    if (project & project.user.equals(req.user._id)) {
+    if (project && project.user.equals(req.user._id)) {
       const newTask = await Task.create({ ...req.body, project: projectId });
-      res.status(200).json(newTask);
+      return res.status(201).json(newTask);
     }
     return res.status(403).json({ message: "You don't own this project" });
   } catch (error) {
@@ -36,12 +36,15 @@ const updateTask = async (req, res) => {
   try {
     const { taskId } = req.params;
     const task = await Task.findById(taskId);
+    if (!task) {
+      return res.status().json({ message: "Task not found" });
+    }
     const project = await Project.findById(task.project); //Find the project that owns this task
     if (project && project.user.equals(req.user._id)) {
-      const updatedTask = await Task.findByIdAndUpdate(projectId, req.body, {
+      const updatedTask = await Task.findByIdAndUpdate(taskId, req.body, {
         new: true,
       });
-      res.status(200).json(updatedTask);
+      return res.status(200).json(updatedTask);
     }
     return res.status(403).json({ message: "You don't own this project" });
   } catch (error) {
@@ -62,7 +65,7 @@ const deleteTask = async (req, res) => {
 
     if (project && project.user.equals(req.user._id)) {
       await Task.findByIdAndDelete(taskId);
-      return res.status(200).json({ message: "Task successfully delted" });
+      return res.status(200).json({ message: "Task successfully deleted" });
     }
     return res.status(403).json({ message: "You don't own this project" });
   } catch (error) {
