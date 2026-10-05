@@ -14,7 +14,7 @@ const getProjects = async (req, res) => {
 };
 
 //Post/create a new project
-const postProject = async (req, res) => {
+const createProject = async (req, res) => {
   try {
     const newProject = await Project.create({
       ...req.body,
@@ -72,7 +72,7 @@ const deleteProject = async (req, res) => {
 
 module.exports = {
   getProjects,
-  postProject,
+  createProject,
   getProject,
   updateProject,
   deleteProject,

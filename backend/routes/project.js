@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 const {
   getProjects,
-  postProject,
+  createProject,
   getProject,
   updateProject,
   deleteProject,
 } = require("../controllers/projectController.js");
 
 router.get("/", getProjects); //Get/view all projects
-router.post("/", postProject); //Post/create a new project
+router.post("/", createProject); //Post/create a new project
 
 router.get("/:id", getProject); //Get/view one project
 
