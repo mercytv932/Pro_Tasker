@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { type SubmitEvent } from "react";
 import { registerUser } from "../services/authApi";
 
 const [username, setUsername] = useState("");
@@ -10,7 +11,8 @@ const [success, setSuccess] = useState("");
 const [isLoading, setIsLoading] = useState(false);
 
 //getting the values from state
-async function handleSubmit() {
+async function handleSubmit(e: SubmitEvent) {
+  e.preventDefault();
   const currentUsername = username;
   const currentEmail = email;
   const currentPassword = password;
@@ -45,18 +47,37 @@ async function handleSubmit() {
 
 function Register() {
   return (
-    <form className="register-page">
+    <form className="register-page" onSubmit={handleSubmit}>
       <div className="input-group">
         <label htmlFor="username">Username</label>
-        <input type="text" placeholder="Choose a username" />
+        <input
+          type="text"
+          placeholder="Choose a username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </div>
+
       <div className="input-group">
         <label htmlFor="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email" />
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
+
       <div className="input-group">
         <label htmlFor="password">Password</label>
-        <input type="password" id="password" placeholder="Create a password" />
+        <input
+          type="password"
+          id="password"
+          placeholder="Create a password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </div>
 
       <div className="input-group">
@@ -65,9 +86,11 @@ function Register() {
           type="password"
           id="confirm-password"
           placeholder="Confirm your password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
       </div>
-      <button>Register</button>
+      <button type="submit">Register</button>
 
       <div className="or">
         <hr />
