@@ -17,7 +17,7 @@ export async function getProjects() {
 }
 
 //2 Create a new project
-export async function createProject(name: string, description: string) {
+export async function createProject(projectId: string, name: string, description: string, status: string) {
   const token = localStorage.getItem("token");
   const response = await fetch("http://localhost:3001/api/projects", {
     method: "POST",
