@@ -68,3 +68,14 @@ export async function updateProject(
   }
 }
 //Delete a project
+export async function deleteProject(id: string) {
+  const response = await fetch(`http://localhost:3001/api/project/${id}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Couldn't delete the project");
+  }
+}
