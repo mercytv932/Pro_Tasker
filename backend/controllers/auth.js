@@ -52,7 +52,7 @@ const userLogin = async (req, res) => {
 
     //If all fields correct, create a token
     const token = signToken(user);
-    res.status(200).json({
+    res.status(201).json({
       token,
       user: {
         _id: user._id,
