@@ -4,8 +4,7 @@ export async function getProjects() {
 
   const response = await fetch("http://localhost:3001/api/projects", {
     headers: {
-      Authorization: `Bearer${token}`,
-      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -17,12 +16,12 @@ export async function getProjects() {
 }
 
 //2 Create a new project
-export async function createProject(projectId: string, name: string, description: string, status: string) {
+export async function createProject(name: string, description: string) {
   const token = localStorage.getItem("token");
   const response = await fetch("http://localhost:3001/api/projects", {
     method: "POST",
     headers: {
-      Authorization: `Bearer${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name, description }),
@@ -30,7 +29,7 @@ export async function createProject(projectId: string, name: string, description
 
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.message || "Could create the project");
+    throw new Error(data.message || "Couldn't create the project");
   }
   return data;
 }
@@ -38,9 +37,9 @@ export async function createProject(projectId: string, name: string, description
 export async function getProject(id: string) {
   const token = localStorage.getItem("token");
 
-  const response = await fetch(`http://localhost:3001/api/project/${id}`, {
+  const response = await fetch(`http://localhost:3001/api/projects/${id}`, {
     headers: {
-      Authorization: `Bearer${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
@@ -49,6 +48,7 @@ export async function getProject(id: string) {
   if (!response.ok) {
     throw new Error(data.message || "Couldn't get the project");
   }
+  return data;
 }
 //Update a project
 export async function updateProject(
@@ -58,32 +58,30 @@ export async function updateProject(
     description: string;
   },
 ) {
-  const token = localStorage.get("token");
+  const token = localStorage.getItem("token");
 
-  const response = await fetch(
-    `http://localhost:3001/api/${updatedData}/${id}`,
-    {
-      method: "PUT",
-      headers: {
-        Authourization: `Bearer${token}`,
-        "Content-Type": "application/json",
-      },
+  const response = await fetch(`http://localhost:3001/api/projects/${id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     },
-  );
+    body: JSON.stringify(updatedData),
+  });
 
   const data = await response.json();
   if (!response.ok) {
     throw new Error(data.message || "Couldn't update the project");
   }
+  return data;
 }
 //Delete a project
 export async function deleteProject(id: string) {
   const token = localStorage.getItem("token");
-  const response = await fetch(`http://localhost:3001/api/project/${id}`, {
+  const response = await fetch(`http://localhost:3001/api/projects/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
     },
   });
 
@@ -91,4 +89,5 @@ export async function deleteProject(id: string) {
   if (!response.ok) {
     throw new Error(data.message || "Couldn't delete the project");
   }
+  return data;
 }
