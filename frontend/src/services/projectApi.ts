@@ -7,6 +7,7 @@ export async function getProjects() {
       Authorization: `Bearer${token}`,
       "Content-Type": "application/json",
     },
+
   });
 
   const data = await response.json(); //turns the JSON response "(getAllProjects)" to JavaScript value
@@ -21,6 +22,7 @@ export async function createProject(name: string, description: string) {
   const response = await fetch("http://localhost:3001/api/projects", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({name, description})
   });
 
   const data = await response.json();
