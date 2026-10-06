@@ -1,5 +1,4 @@
-//Get projects from the backend/view all projects
-
+//1 Get projects from the backend/view all projects
 export async function getProjects() {
   const token = localStorage.getItem("token"); //Save token so that projectAuth.ts can use it.
 
@@ -17,7 +16,19 @@ export async function getProjects() {
   return data;
 }
 
-//Create a new project
+//2 Create a new project
+export async function createProject(name: string, description: string) {
+  const response = await fetch("http://localhost:3001/api/projects", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Could create the project");
+  }
+  return data;
+}
 //Get a project/view one project
 //Updare a project
 //Delete a project
