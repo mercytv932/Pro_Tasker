@@ -61,6 +61,19 @@ export async function updateTask(
 }
 
 //Delete a task
-export async function deleteTask(taskId:string){
-  
+export async function deleteTask(taskId: string) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`http://localhost:3001/api/${taskId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Couldn't delete the task");
+  }
 }
