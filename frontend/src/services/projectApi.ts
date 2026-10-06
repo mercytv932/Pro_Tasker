@@ -46,5 +46,25 @@ export async function getProject(id: string) {
     throw new Error(data.message || "Couldn't get the project");
   }
 }
-//Updare a project
+//Update a project
+export async function updateProject(
+  id: string,
+  updatedData: {
+    name: string;
+    description: string;
+  },
+) {
+  const response = await fetch(
+    `http://localhost:3001/api/${updatedData}/${id}`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+    },
+  );
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Couldn't update the project");
+  }
+}
 //Delete a project
