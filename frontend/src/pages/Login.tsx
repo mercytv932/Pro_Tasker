@@ -1,41 +1,41 @@
 import { useState, type SubmitEvent } from "react";
+import { Link } from "react-router-dom";
 import { loginUser } from "../services/authApi";
 
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [error, setError] = useState("");
-const [success, setSuccess] = useState("");
-const [isLoading, setIsLoading] = useState(false);
-
-async function handleSubmit(e: SubmitEvent) {
-  e.preventDefault();
-
-  const currentEmail = email;
-  const currentPassword = password;
-
-  if (!email || !password) {
-    setError("Please enter you email and password");
-    return;
-  }
-
-  setIsLoading(true);
-  setError("");
-  setSuccess("");
-
-  try {
-    const data = await loginUser(currentEmail, currentPassword);
-    console.log(data);
-
-    setSuccess("Login successful");
-  } catch (error) {
-    console.error("Login error", error);
-    setError("Login failed");
-  } finally {
-    setIsLoading(false);
-  }
-}
-
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function handleSubmit(e: SubmitEvent) {
+    e.preventDefault();
+
+    const currentEmail = email;
+    const currentPassword = password;
+
+    if (!email || !password) {
+      setError("Please enter you email and password");
+      return;
+    }
+
+    setIsLoading(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      const data = await loginUser(currentEmail, currentPassword);
+      console.log(data);
+
+      setSuccess("Login successful");
+    } catch (error) {
+      console.error("Login error", error);
+      setError("Login failed");
+    } finally {
+      setIsLoading(false);
+    }
+  }
   return (
     <form className="login-page" onSubmit={handleSubmit}>
       <div className="input-group">
@@ -70,7 +70,7 @@ function Login() {
         <hr />
       </div>
       <p className="auth-switch">
-        Don't have an account? <a href="">Register</a>
+        Don't have an account? <Link to="/register">Register</Link>
       </p>
     </form>
   );

@@ -1,51 +1,55 @@
 import { useState } from "react";
 import { type SubmitEvent } from "react";
 import { registerUser } from "../services/authApi";
-
-const [username, setUsername] = useState("");
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [confirmPassword, setConfirmPassword] = useState("");
-const [error, setError] = useState("");
-const [success, setSuccess] = useState("");
-const [isLoading, setIsLoading] = useState(false);
-
-//getting the values from state
-async function handleSubmit(e: SubmitEvent) {
-  e.preventDefault();
-  const currentUsername = username;
-  const currentEmail = email;
-  const currentPassword = password;
-  const currentConfirmPassword = confirmPassword;
-
-  //check if password matches confirm password
-  if (currentPassword !== currentConfirmPassword) {
-    setError("Password did not match");
-    return;
-  }
-  setIsLoading(true); //We're currently talking to the  backend
-  setError(""); //Clears any previous errors.
-  setSuccess("");
-
-  //Tells auth.ts to register this user and wait for backend response.
-  try {
-    const data = await registerUser(
-      currentUsername,
-      currentEmail,
-      currentPassword,
-    );
-    console.log(data);
-
-    setSuccess("Account created successfully");
-  } catch (error) {
-    console.error("Registration error:", error);
-    setError("Registration failed");
-  } finally {
-    setIsLoading(false); //loading stops whether no matter the outcome.
-  }
-}
+import { Link } from "react-router-dom";
 
 function Register() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  //getting the values from state
+  async function handleSubmit(e: SubmitEvent) {
+    e.preventDefault();
+    const currentUsername = username;
+    const currentEmail = email;
+    const currentPassword = password;
+    const currentConfirmPassword = confirmPassword;
+
+    //check if password matches confirm password
+    if (currentPassword !== currentConfirmPassword) {
+      setError("Password did not match");
+      return;
+    }
+    setIsLoading(true); //We're currently talking to the  backend
+    setError(""); //Clears any previous errors.
+    setSuccess("");
+
+    //Tells auth.ts to register this user and wait for backend response.
+    try {
+      const data = await registerUser(
+        currentUsername,
+        currentEmail,
+        currentPassword,
+      );
+      console.log(data);
+
+      setSuccess("Account created successfully");
+    } catch (error) {
+      console.error("Registration error:", error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Registration failed");
+      }
+    } finally {
+      setIsLoading(false); //loading stops whether no matter the outcome.
+    }
+  }
   return (
     <form className="register-page" onSubmit={handleSubmit}>
       <div className="input-group">
@@ -104,7 +108,7 @@ function Register() {
         <hr />
       </div>
       <p className="auth-switch">
-        Already have an account? <a href="">Login</a>
+        Already have an account? <Link to="/login">Login</Link>
       </p>
     </form>
   );

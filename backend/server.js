@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
+const cors = require("cors");
 const mongoDbConnection = require("./config/dbConnection.js");
 const PORT = process.env.PORT || 3001;
 
@@ -11,6 +12,7 @@ const taskRouter = require("./routes/task.js");
 
 mongoDbConnection();
 app.use(express.json());
+app.use(cors());
 
 app.use("/api/users", userRouter);
 app.use("/api/projects", projectRouter);
