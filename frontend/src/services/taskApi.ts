@@ -28,12 +28,39 @@ export async function createTask(
       Authorization: `Bearer${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(newTaskData),
+    body: JSON.stringify({ newTaskData }),
   });
 
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "filaid");
+    throw new Error(data.message || "Failed to create a task");
   }
+}
+
+//Update a task
+export async function updateTask(
+  taskId: string,
+  updatedTask: { title: string; description: string },
+) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`http://localhost:3001/api/:${taskId}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ updatedTask }),
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Couldn't update the task");
+  }
+}
+
+//Delete a task
+export async function deleteTask(taskId:string){
+  
 }
