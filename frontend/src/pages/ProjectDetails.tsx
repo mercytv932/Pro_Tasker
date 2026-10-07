@@ -1,3 +1,4 @@
+import { type SubmitEvent } from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -23,7 +24,8 @@ function ProjectDetails() {
 
   //task states
   const [tasks, setTasks] = useState<Task[]>([]);
-
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
   const { id } = useParams(); //Gets the project's id from the url, we use that to ask backend for that project.
 
   useEffect(() => {
@@ -53,6 +55,23 @@ function ProjectDetails() {
     return <p>Loading project</p>;
   }
 
+  async function createTaskButton(e: SubmitEvent) {
+    e.preventDefault();
+
+    const currentTaskName = taskTitle;
+    const currentTaskDescription = taskDescription;
+    if (!id) {
+      return;
+    }
+    const newTask = await createTask(id, {
+      title: currentTaskName,
+      description: currentTaskDescription,
+    });
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+    setTaskTitle("");
+    setTaskDescription("");
+  }
+
   return (
     <div>
       <div>
@@ -69,6 +88,28 @@ function ProjectDetails() {
           <p>{task.status}</p>
         </div>
       ))}
+      <form onSubmit={createTaskButton}>
+        <h4>Add Task</h4>
+        <div>
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            value={taskTitle}
+            onChange={(e) => setTaskTitle(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="description">Description</label>
+          <input
+            type="text"
+            id="description"
+            value={taskDescription}
+            onChange={(e) => setTaskDescription(e.target.value)}
+          />
+        </div>
+        <button>Create Task</button>
+      </form>
     </div>
   );
 }
