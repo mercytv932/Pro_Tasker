@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { getProjects } from "../services/projectApi";
+import { useEffect, useState, type SubmitEvent } from "react";
+import { getProjects, createProject } from "../services/projectApi";
 
 type Project = {
   _id: string;
@@ -8,19 +8,31 @@ type Project = {
 };
 
 function Dashboard() {
-  const [projects, setProjects] = useState<Project[]>([]); //load function state
-  const [projectName, setProjectName] = useState("");
-  const [description, setDescription] = useState("");
+  const [projects, setProjects] = useState<Project[]>([]); //loadProjects function state
 
+  const [projectName, setProjectName] = useState(""); //create project state
+  const [projectDescription, setProjectDescription] = useState(""); //create project state
+
+  //load projects or getProjects();
   useEffect(() => {
     async function loadProjects() {
       const data = await getProjects();
       console.log(data);
       setProjects(data);
     }
-
     loadProjects();
+    createProject;
   }, []);
+
+  //crate project button
+  async function createProjectButton(e: SubmitEvent) {
+    e.preventDefault();
+
+    const currentProjectName = projectName;
+    const currentProjectDescription = projectDescription;
+    await createProject(currentProjectName, currentProjectDescription);
+  }
+
   return (
     <div>
       {projects.map((project) => (
@@ -30,11 +42,17 @@ function Dashboard() {
         </div>
       ))}
 
-      <form>
+      <form onSubmit={createProjectButton}>
         <h3>Create Project</h3>
         <div>
           <label htmlFor="name">Project Name</label>
-          <input type="text" placeholder="project name..." id="name" />
+          <input
+            type="text"
+            placeholder="project name..."
+            id="name"
+            value={projectName}
+            onChange={(e) => setProjectName(e.target.value)}
+          />
         </div>
 
         <div>
@@ -43,9 +61,11 @@ function Dashboard() {
             type="text"
             placeholder="describe your project..."
             id="description"
+            value={projectDescription}
+            onChange={(e) => setProjectDescription(e.target.value)}
           />
         </div>
-        <button>Create</button>
+        <button type="submit">Create</button>
       </form>
     </div>
   );
