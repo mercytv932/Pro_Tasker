@@ -18,6 +18,9 @@ import type { Project } from "../types/project";
 import type { Task } from "../types/task";
 function ProjectDetails() {
   const [project, setProject] = useState<Project | null>(null); //Store the project we get from backend. Starts null
+  const [editingProject, setEditingProject] = useState(false);
+  const [editProjectName, setEditProjectName] = useState("");
+  const [editProjectDescription, setEditProjectDescription] = useState("");
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [error, setError] = useState("");
@@ -60,13 +63,23 @@ function ProjectDetails() {
   if (!project) {
     return <p>Loading project</p>;
   }
-
+  async function editProjectButton() {
+    if (!id) {
+      return;
+    }
+    const updatedProject = await updateProject(id, {
+      name: editProjectName,
+      description: editProjectDescription,
+    });
+    setProject(updatedProject);
+    setEditingProject(false);
+  }
   async function deleteProjectButton() {
     if (!id) {
       return;
     }
     await deleteProject(id);
-    navigate("/dashboard");//after
+    navigate("/dashboard"); //after
   }
 
   async function createTaskButton(e: SubmitEvent) {
@@ -115,7 +128,33 @@ function ProjectDetails() {
       <div>
         <h2>{project.name}</h2>
         <p>{project.description}</p>
+        <button
+          onClick={() => {
+            setEditingProject(true);
+            setEditProjectName(project.name);
+            setEditProjectDescription(project.description);
+          }}
+        >
+          Edit project
+        </button>
         <button onClick={deleteProjectButton}>Delete Project</button>
+        {editingProject ? (
+          <div>
+            <input
+              type="text"
+              value={editProjectName}
+              onChange={(e) => setEditProjectName(e.target.value)}
+            />
+
+            <input
+              type="text"
+              value={editProjectDescription}
+              onChange={(e) => setEditProjectDescription(e.target.value)}
+            />
+
+            <button onClick={editProjectButton}>Save</button>
+          </div>
+        ) : null}
       </div>
 
       <h3>Tasks</h3>
@@ -126,8 +165,10 @@ function ProjectDetails() {
           <p>{task.description}</p>
           <p>{task.status}</p>
           <div>
-            <button onClick={() => deleteTaskButton(task._id)}>Delete</button>
-            <button onClick={() => startEditingTask(task)}>Edit</button>
+            <button onClick={() => deleteTaskButton(task._id)}>
+              Delete Task
+            </button>
+            <button onClick={() => startEditingTask(task)}>Edit Task</button>
             {editingTaskId === task._id ? (
               <div>
                 <input
