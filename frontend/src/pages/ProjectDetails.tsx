@@ -72,6 +72,11 @@ function ProjectDetails() {
     setTaskDescription("");
   }
 
+  async function deleteTaskButton(taskId: string) {
+    await deleteTask(taskId);
+    setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
+  } //new tasks state = if this is not the task we deleted, keep the task
+
   return (
     <div>
       <div>
@@ -86,6 +91,7 @@ function ProjectDetails() {
           <h4>{task.title}</h4>
           <p>{task.description}</p>
           <p>{task.status}</p>
+          <button onClick={() => deleteTaskButton(task._id)}>Delete</button>
         </div>
       ))}
       <form onSubmit={createTaskButton}>
