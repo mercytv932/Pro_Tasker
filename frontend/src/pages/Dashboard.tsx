@@ -34,6 +34,8 @@ function Dashboard() {
       currentProjectDescription,
     ); //creates the project in the backend
     setProjects((prevProjects) => [...prevProjects, newProject]); //take exiisting projects ...prevProjects and add new project to it.
+    setProjectName("");
+    setProjectDescription("");
   }
 
   return (

@@ -9,6 +9,8 @@ export async function getProjects() {
   });
 
   const data = await response.json(); //turns the JSON response "(getAllProjects)" to JavaScript value
+  console.log(response.status);
+  console.log(data);
   if (!response.ok) {
     throw new Error(data.message || "Couldn't get the projects");
   }

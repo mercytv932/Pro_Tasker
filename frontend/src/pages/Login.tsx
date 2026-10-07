@@ -1,8 +1,9 @@
 import { useState, type SubmitEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authApi";
 
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -26,15 +27,20 @@ function Login() {
 
     try {
       const data = await loginUser(currentEmail, currentPassword);
-      console.log(data);
+
+      localStorage.setItem("token", data.token);
 
       setSuccess("Login successful");
+
+      navigate("/dashboard"); //when success navigate to dashboard page
     } catch (error) {
       console.error("Login error", error);
       setError("Login failed");
     } finally {
       setIsLoading(false);
     }
+
+    //navigate to dashboard after login successfull
   }
   return (
     <form className="login-page" onSubmit={handleSubmit}>
