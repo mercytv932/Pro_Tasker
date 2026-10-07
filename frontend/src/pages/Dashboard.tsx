@@ -1,11 +1,6 @@
 import { useEffect, useState, type SubmitEvent } from "react";
 import { getProjects, createProject } from "../services/projectApi";
-
-type Project = {
-  _id: string;
-  name: string;
-  description: string;
-};
+import type { Project } from "../types/project";
 
 function Dashboard() {
   const [projects, setProjects] = useState<Project[]>([]); //loadProjects function state
