@@ -6,14 +6,13 @@ import {
   deleteProject,
 } from "../services/projectApi";
 import type { Project } from "../types/project";
-
-const [project, setProject] = useState<Project | null>(null); //We store the page's project here. At beginning, it'll contain a project or [];
-const [projectName, setProjectName] = useState("");
-const [projectDescription, setProjectDescription] = useState("");
-const [error, setError] = useState("");
-const [isLoading, setIsLoading] = useState(false);
-
 function ProjectDetails() {
+  const [project, setProject] = useState<Project | null>(null); //Store the project we get from backend. Starts null
+  const [projectName, setProjectName] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const { id } = useParams(); //Gets the project's id from the url, we use that to ask backend for that project.
 
   useEffect(() => {
@@ -27,7 +26,17 @@ function ProjectDetails() {
     loadProject(id);
   }, [id]);
 
-  return <div>{}</div>;
+  if (!project) {
+    return <p>Loading project</p>;
+  }
+  return (
+    <div>
+      <div>
+        <h2>{project.name}</h2>
+        <p>{project.description}</p>
+      </div>
+    </div>
+  );
 }
 
 export default ProjectDetails;
