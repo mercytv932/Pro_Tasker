@@ -26,6 +26,9 @@ function ProjectDetails() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
+  const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
+  const [editTaskTitle, setEditTaskTitle] = useState("");
+  const [editTaskDescription, setEditTaskDescription] = useState("");
   const { id } = useParams(); //Gets the project's id from the url, we use that to ask backend for that project.
 
   useEffect(() => {
@@ -77,6 +80,25 @@ function ProjectDetails() {
     setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
   } //new tasks state = if this is not the task we deleted, keep the task
 
+  function startEditingTask(task: Task) {
+    setEditingTaskId(task._id);
+    setEditTaskTitle(task.title);
+    setEditTaskDescription(task.description);
+  } //Starts editing and loading current task values into form
+
+  async function editTaskButton(
+    taskId: string,
+    updatedTask: { title: string; description: string },
+  ) {
+    const updatedTaskData = await updateTask(taskId, updatedTask);
+
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task._id === taskId ? updatedTaskData : task)),
+    );
+
+    setEditingTaskId(null); //edit form closes after edit button clicked
+  } //Runs when clicking save to save the edited values
+
   return (
     <div>
       <div>
@@ -91,7 +113,35 @@ function ProjectDetails() {
           <h4>{task.title}</h4>
           <p>{task.description}</p>
           <p>{task.status}</p>
-          <button onClick={() => deleteTaskButton(task._id)}>Delete</button>
+          <div>
+            <button onClick={() => deleteTaskButton(task._id)}>Delete</button>
+            <button onClick={() => startEditingTask(task)}>Edit</button>
+            {editingTaskId === task._id ? (
+              <div>
+                <input
+                  type="text"
+                  value={editTaskTitle}
+                  onChange={(e) => setEditTaskTitle(e.target.value)}
+                />
+                <input
+                  type="text"
+                  value={editTaskDescription}
+                  onChange={(e) => setEditTaskDescription(e.target.value)}
+                />
+
+                <button
+                  onClick={() =>
+                    editTaskButton(task._id, {
+                      title: editTaskTitle,
+                      description: editTaskDescription,
+                    })
+                  }
+                >
+                  Save
+                </button>
+              </div>
+            ) : null}
+          </div>
         </div>
       ))}
       <form onSubmit={createTaskButton}>
