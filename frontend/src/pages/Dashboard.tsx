@@ -8,7 +8,9 @@ type Project = {
 };
 
 function Dashboard() {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]); //load function state
+  const [projectName, setProjectName] = useState("");
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     async function loadProjects() {
@@ -27,6 +29,24 @@ function Dashboard() {
           <p>{project.description}</p>
         </div>
       ))}
+
+      <form>
+        <h3>Create Project</h3>
+        <div>
+          <label htmlFor="name">Project Name</label>
+          <input type="text" placeholder="project name..." id="name" />
+        </div>
+
+        <div>
+          <label htmlFor="description">Description</label>
+          <input
+            type="text"
+            placeholder="describe your project..."
+            id="description"
+          />
+        </div>
+        <button>Create</button>
+      </form>
     </div>
   );
 }
