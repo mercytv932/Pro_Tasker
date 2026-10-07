@@ -21,7 +21,6 @@ function Dashboard() {
       setProjects(data);
     }
     loadProjects();
-    createProject;
   }, []);
 
   //crate project button
@@ -30,7 +29,11 @@ function Dashboard() {
 
     const currentProjectName = projectName;
     const currentProjectDescription = projectDescription;
-    await createProject(currentProjectName, currentProjectDescription);
+    const newProject = await createProject(
+      currentProjectName,
+      currentProjectDescription,
+    ); //creates the project in the backend
+    setProjects((prevProjects) => [...prevProjects, newProject]); //take exiisting projects ...prevProjects and add new project to it.
   }
 
   return (
