@@ -1,4 +1,5 @@
 import { useEffect, useState, type SubmitEvent } from "react";
+import { Link } from "react-router-dom";
 import { getProjects, createProject } from "../services/projectApi";
 import type { Project } from "../types/project";
 
@@ -39,6 +40,8 @@ function Dashboard() {
         <div key={project._id}>
           <h2>{project.name}</h2>
           <p>{project.description}</p>
+          <Link to={`/project/${project._id}`}>view project</Link>{" "}
+          {/*go to project's page to show project with this id*/}
         </div>
       ))}
 
