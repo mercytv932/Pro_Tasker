@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { type SubmitEvent } from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -29,7 +30,9 @@ function ProjectDetails() {
   const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
   const [editTaskTitle, setEditTaskTitle] = useState("");
   const [editTaskDescription, setEditTaskDescription] = useState("");
+
   const { id } = useParams(); //Gets the project's id from the url, we use that to ask backend for that project.
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadProject(id: string | undefined) {
@@ -56,6 +59,14 @@ function ProjectDetails() {
 
   if (!project) {
     return <p>Loading project</p>;
+  }
+
+  async function deleteProjectButton() {
+    if (!id) {
+      return;
+    }
+    await deleteProject(id);
+    navigate("/dashboard");//after
   }
 
   async function createTaskButton(e: SubmitEvent) {
@@ -104,6 +115,7 @@ function ProjectDetails() {
       <div>
         <h2>{project.name}</h2>
         <p>{project.description}</p>
+        <button onClick={deleteProjectButton}>Delete Project</button>
       </div>
 
       <h3>Tasks</h3>
