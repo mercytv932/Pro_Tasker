@@ -16,6 +16,7 @@ import {
 } from "../services/taskApi";
 import type { Project } from "../types/project";
 import type { Task } from "../types/task";
+import TaskForm from "../components/TaskForm";
 function ProjectDetails() {
   const [project, setProject] = useState<Project | null>(null); //Store the project we get from backend. Starts null
   const [editingProject, setEditingProject] = useState(false);
@@ -196,28 +197,14 @@ function ProjectDetails() {
           </div>
         </div>
       ))}
-      <form onSubmit={createTaskButton}>
-        <h4>Add Task</h4>
-        <div>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            id="title"
-            value={taskTitle}
-            onChange={(e) => setTaskTitle(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Description</label>
-          <input
-            type="text"
-            id="description"
-            value={taskDescription}
-            onChange={(e) => setTaskDescription(e.target.value)}
-          />
-        </div>
-        <button>Create Task</button>
-      </form>
+
+      <TaskForm
+        taskTitle={taskTitle}
+        setTaskTitle={setTaskTitle}
+        taskDescription={taskDescription}
+        setTaskDescription={setTaskDescription}
+        createTaskButton={createTaskButton}
+      />
     </div>
   );
 }
