@@ -21,10 +21,9 @@ function ProjectDetails() {
   const [editingProject, setEditingProject] = useState(false);
   const [editProjectName, setEditProjectName] = useState("");
   const [editProjectDescription, setEditProjectDescription] = useState("");
-  const [projectName, setProjectName] = useState("");
-  const [projectDescription, setProjectDescription] = useState("");
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+
+  // const [error, setError] = useState("");
+  // const [isLoading, setIsLoading] = useState(false);
 
   //task states
   const [tasks, setTasks] = useState<Task[]>([]);

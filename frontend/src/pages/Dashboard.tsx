@@ -2,7 +2,7 @@ import { useEffect, useState, type SubmitEvent } from "react";
 import { Link } from "react-router-dom";
 import { getProjects, createProject } from "../services/projectApi";
 import type { Project } from "../types/project";
-
+import ProjectForm from "../components/ProjectForm";
 function Dashboard() {
   const [projects, setProjects] = useState<Project[]>([]); //loadProjects function state
 
@@ -44,32 +44,13 @@ function Dashboard() {
           {/*go to project's page to show project with this id*/}
         </div>
       ))}
-
-      <form onSubmit={createProjectButton}>
-        <h3>Create Project</h3>
-        <div>
-          <label htmlFor="name">Project Name</label>
-          <input
-            type="text"
-            placeholder="project name..."
-            id="name"
-            value={projectName}
-            onChange={(e) => setProjectName(e.target.value)}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="description">Description</label>
-          <input
-            type="text"
-            placeholder="describe your project..."
-            id="description"
-            value={projectDescription}
-            onChange={(e) => setProjectDescription(e.target.value)}
-          />
-        </div>
-        <button type="submit">Create</button>
-      </form>
+      <ProjectForm
+        projectName={projectName}
+        setProjectName={setProjectName}
+        projectDescription={projectDescription}
+        setProjectDescription={setProjectDescription}
+        createProjectButton={createProjectButton}
+      />
     </div>
   );
 }
