@@ -1,15 +1,14 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 //Get/view all tasks
 export async function getTasks(projectId: string) {
   const token = localStorage.getItem("token");
 
-  const response = await fetch(
-    `http://localhost:3001/api/tasks/${projectId}/tasks`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  const response = await fetch(`${API_URL}/api/tasks/${projectId}/tasks`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-  );
+  });
 
   const data = await response.json();
   if (!response.ok) {
@@ -25,17 +24,14 @@ export async function createTask(
 ) {
   const token = localStorage.getItem("token");
 
-  const response = await fetch(
-    `http://localhost:3001/api/tasks/${projectId}/tasks`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newTaskData),
+  const response = await fetch(`${API_URL}/api/tasks/${projectId}/tasks`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     },
-  );
+    body: JSON.stringify(newTaskData),
+  });
 
   const data = await response.json();
 
@@ -52,7 +48,7 @@ export async function updateTask(
 ) {
   const token = localStorage.getItem("token");
 
-  const response = await fetch(`http://localhost:3001/api/tasks/${taskId}`, {
+  const response = await fetch(`${API_URL}/api/tasks/${taskId}`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -72,7 +68,7 @@ export async function updateTask(
 export async function deleteTask(taskId: string) {
   const token = localStorage.getItem("token");
 
-  const response = await fetch(`http://localhost:3001/api/tasks/${taskId}`, {
+  const response = await fetch(`${API_URL}/api/tasks/${taskId}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
