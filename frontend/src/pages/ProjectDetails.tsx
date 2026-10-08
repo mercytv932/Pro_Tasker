@@ -17,6 +17,7 @@ import {
 import type { Project } from "../types/project";
 import type { Task } from "../types/task";
 import TaskForm from "../components/TaskForm";
+import TaskCard from "../components/TaskCard";
 function ProjectDetails() {
   const [project, setProject] = useState<Project | null>(null); //Store the project we get from backend. Starts null
   const [editingProject, setEditingProject] = useState(false);
@@ -158,46 +159,20 @@ function ProjectDetails() {
       </div>
 
       <h3>Tasks</h3>
-
       {tasks.map((task) => (
-        <div key={task._id}>
-          <h4>{task.title}</h4>
-          <p>{task.description}</p>
-          <p>{task.status}</p>
-          <div>
-            <button onClick={() => deleteTaskButton(task._id)}>
-              Delete Task
-            </button>
-            <button onClick={() => startEditingTask(task)}>Edit Task</button>
-            {editingTaskId === task._id ? (
-              <div>
-                <input
-                  type="text"
-                  value={editTaskTitle}
-                  onChange={(e) => setEditTaskTitle(e.target.value)}
-                />
-                <input
-                  type="text"
-                  value={editTaskDescription}
-                  onChange={(e) => setEditTaskDescription(e.target.value)}
-                />
-
-                <button
-                  onClick={() =>
-                    editTaskButton(task._id, {
-                      title: editTaskTitle,
-                      description: editTaskDescription,
-                    })
-                  }
-                >
-                  Save
-                </button>
-              </div>
-            ) : null}
-          </div>
-        </div>
+        <TaskCard
+          key={task._id}
+          task={task}
+          deleteTaskButton={deleteTaskButton}
+          startEditingTask={startEditingTask}
+          editTaskButton={editTaskButton}
+          editingTaskId={editingTaskId}
+          editTaskTitle={editTaskTitle}
+          setEditingTaskTitle={setEditTaskTitle}
+          editTaskDescription={editTaskDescription}
+          setEditTaskDescription={setEditTaskDescription}
+        />
       ))}
-
       <TaskForm
         taskTitle={taskTitle}
         setTaskTitle={setTaskTitle}
