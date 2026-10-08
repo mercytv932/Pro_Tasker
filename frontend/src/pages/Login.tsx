@@ -1,8 +1,15 @@
-import { useState, type SubmitEvent } from "react";
+import { useContext, useState, type SubmitEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authApi";
+import AuthContext from "../context/AuthenticationContext";
 
 function Login() {
+  const auth = useContext(AuthContext); //storing authentication info from AuthContext
+  if (!auth) {
+    throw new Error("Login must be in AuthProvider"); //If there isn't AuthProvider around login.
+  }
+  const { login } = auth; //takes login out of auth
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,6 +34,7 @@ function Login() {
 
     try {
       const data = await loginUser(currentEmail, currentPassword);
+      login(data.user); //AuthProvider stores user as the currently logged in user.
 
       localStorage.setItem("token", data.token);
 
