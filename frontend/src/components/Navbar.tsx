@@ -13,10 +13,12 @@ function Navbar() {
     return null;
   }
   return (
-    <div>
-      <p>Welcome, {user.username}</p>
-      <button onClick={logout}>Logout</button>
-    </div>
+    <nav className="navbar">
+      <p className="navbar-welcome">Welcome, {user.username}</p>
+      <button className="navbar-logout" onClick={logout}>
+        Logout
+      </button>
+    </nav>
   );
 }
 

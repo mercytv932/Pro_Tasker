@@ -16,27 +16,32 @@ function TaskForm({
   createTaskButton,
 }: TaskFormProps) {
   return (
-    <form onSubmit={createTaskButton}>
-      <h4>Add Task</h4>
-      <div>
+    <form className="task-form" onSubmit={createTaskButton}>
+      <h4 className="task-form-title">Add Task</h4>
+
+      <div className="task-form-group">
         <label htmlFor="title">Title</label>
         <input
+          className="task-form-input"
           type="text"
           id="title"
           value={taskTitle}
           onChange={(e) => setTaskTitle(e.target.value)}
         />
       </div>
-      <div>
+
+      <div className="task-form-group">
         <label htmlFor="description">Description</label>
         <input
+          className="task-form-input"
           type="text"
           id="description"
           value={taskDescription}
           onChange={(e) => setTaskDescription(e.target.value)}
         />
       </div>
-      <button>Create Task</button>
+
+      <button className="task-form-button">Create Task</button>
     </form>
   );
 }

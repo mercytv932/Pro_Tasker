@@ -16,11 +16,13 @@ function ProjectForm({
   createProjectButton,
 }: ProjectFormProps) {
   return (
-    <form onSubmit={createProjectButton}>
-      <h3>Create Project</h3>
-      <div>
+    <form className="project-form" onSubmit={createProjectButton}>
+      <h3 className="project-form-title">Create Project</h3>
+
+      <div className="project-form-group">
         <label htmlFor="name">Project Name</label>
         <input
+          className="project-form-input"
           type="text"
           placeholder="project name..."
           id="name"
@@ -29,9 +31,10 @@ function ProjectForm({
         />
       </div>
 
-      <div>
+      <div className="project-form-group">
         <label htmlFor="description">Description</label>
         <input
+          className="project-form-input"
           type="text"
           placeholder="describe your project..."
           id="description"
@@ -39,7 +42,10 @@ function ProjectForm({
           onChange={(e) => setProjectDescription(e.target.value)}
         />
       </div>
-      <button type="submit">Create</button>
+
+      <button className="project-form-button" type="submit">
+        Create
+      </button>
     </form>
   );
 }

@@ -6,12 +6,29 @@
 }
 
 * {
-  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: Arial, sans-serif;
+}
+:root {
+  --bg-dark: #080f1f;
+  --bg-card: #111b31;
+  --bg-input: #17233b;
+
+  --primary: #5865f2;
+  --primary-light: #6675ff;
+
+  --text-main: #f5f7ff;
+  --text-muted: #91a0bd;
+
+  --border: #263552;
+
+  --success: #3ee0b0;
 }
 
 img,

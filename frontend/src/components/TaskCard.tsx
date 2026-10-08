@@ -28,27 +28,47 @@ function TaskCard({
   setEditTaskDescription,
 }: TaskCardProps) {
   return (
-    <div>
-      <h4>{task.title}</h4>
-      <p>{task.description}</p>
-      <p>{task.status}</p>
+    <div className="task-card">
+      <h4 className="task-card-title">{task.title}</h4>
 
-      <button onClick={() => deleteTaskButton(task._id)}>Delete Task</button>
-      <button onClick={() => startEditingTask(task)}>Edit Task</button>
+      <p className="task-card-description">{task.description}</p>
+
+      <p className="task-card-status">{task.status}</p>
+
+      <div className="task-card-actions">
+        <button
+          className="task-delete-button"
+          onClick={() => deleteTaskButton(task._id)}
+        >
+          Delete Task
+        </button>
+
+        <button
+          className="task-edit-button"
+          onClick={() => startEditingTask(task)}
+        >
+          Edit Task
+        </button>
+      </div>
+
       {editingTaskId === task._id ? (
-        <div>
+        <div className="task-edit-form">
           <input
+            className="task-edit-input"
             type="text"
             value={editTaskTitle}
             onChange={(e) => setEditingTaskTitle(e.target.value)}
           />
+
           <input
+            className="task-edit-input"
             type="text"
             value={editTaskDescription}
             onChange={(e) => setEditTaskDescription(e.target.value)}
           />
 
           <button
+            className="task-save-button"
             onClick={() =>
               editTaskButton(task._id, {
                 title: editTaskTitle,

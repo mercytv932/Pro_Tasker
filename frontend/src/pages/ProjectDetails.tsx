@@ -125,35 +125,51 @@ function ProjectDetails() {
   } //Runs when clicking save to save the edited values
 
   return (
-    <div>
-      <div>
-        <h2>{project.name}</h2>
-        <p>{project.description}</p>
-        <button
-          onClick={() => {
-            setEditingProject(true);
-            setEditProjectName(project.name);
-            setEditProjectDescription(project.description);
-          }}
-        >
-          Edit project
-        </button>
-        <button onClick={deleteProjectButton}>Delete Project</button>
+    <div className="project-details">
+      <div className="project-header">
+        <h2 className="project-title">{project.name}</h2>
+
+        <p className="project-description">{project.description}</p>
+
+        <div className="project-actions">
+          <button
+            className="project-edit-button"
+            onClick={() => {
+              setEditingProject(true);
+              setEditProjectName(project.name);
+              setEditProjectDescription(project.description);
+            }}
+          >
+            Edit Project
+          </button>
+
+          <button
+            className="project-delete-button"
+            onClick={deleteProjectButton}
+          >
+            Delete Project
+          </button>
+        </div>
+
         {editingProject ? (
-          <div>
+          <div className="project-edit-form">
             <input
+              className="project-edit-input"
               type="text"
               value={editProjectName}
               onChange={(e) => setEditProjectName(e.target.value)}
             />
 
             <input
+              className="project-edit-input"
               type="text"
               value={editProjectDescription}
               onChange={(e) => setEditProjectDescription(e.target.value)}
             />
 
-            <button onClick={editProjectButton}>Save</button>
+            <button className="project-save-button" onClick={editProjectButton}>
+              Save
+            </button>
           </div>
         ) : null}
       </div>

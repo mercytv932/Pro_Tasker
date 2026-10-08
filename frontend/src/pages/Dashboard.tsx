@@ -36,12 +36,14 @@ function Dashboard() {
   }
 
   return (
-    <div>
+    <div className="dashboard">
       {projects.map((project) => (
-        <div key={project._id}>
+        <div className="project-item" key={project._id}>
           <ProjectCard project={project} />{" "}
           {/*Project Card display from projectCard*/}
-          <Link to={`/project/${project._id}`}>view project</Link>
+          <Link className="project-view-link" to={`/project/${project._id}`}>
+            view project
+          </Link>
         </div>
       ))}
       {/* Project create form from ProjctForm */}

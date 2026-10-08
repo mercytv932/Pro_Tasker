@@ -1,3 +1,19 @@
+:root {
+  --bg-dark: #080f1f;
+  --bg-card: #111b31;
+  --bg-input: #17233b;
+
+  --primary: #5865f2;
+  --primary-light: #6675ff;
+
+  --text-main: #f5f7ff;
+  --text-muted: #91a0bd;
+
+  --border: #263552;
+
+  --success: #3ee0b0;
+}
+
 /* Login/Register page styles */
 .login-page,
 .register-page {
@@ -76,4 +92,34 @@ button {
 
 .auth-switch a:hover {
   text-decoration: underline;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 32px;
+
+  background-color: var(--bg--card);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-welcome {
+  color: var(--text-main);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.navbar-logout {
+  padding: 8px 16px;
+  width: auto;
+
+  background-color: var(--primary);
+  color: var(--text-main);
+
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
