@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { type SubmitEvent } from "react";
 import { useState, useEffect } from "react";
@@ -126,6 +127,9 @@ function ProjectDetails() {
 
   return (
     <div className="project-details">
+      <Link className="project-back-link" to="/dashboard">
+        Back to Dashboard
+      </Link>
       <div className="project-header">
         <h2 className="project-title">{project.name}</h2>
 
