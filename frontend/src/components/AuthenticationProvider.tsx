@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState, type ReactNode } from "react";
 import AuthContext from "../context/AuthenticationContext";
 import type { User } from "../types/user";
@@ -9,6 +10,8 @@ type AuthProviderprops = {
 function AuthProvider({ children }: AuthProviderprops) {
   const [user, setUser] = useState<User | null>(null); //Starts as no user logged in yet  = null;
 
+  const navigate = useNavigate();
+
   //login
   function login(userData: User) {
     setUser(userData);
@@ -18,6 +21,7 @@ function AuthProvider({ children }: AuthProviderprops) {
   function logout() {
     setUser(null);
     localStorage.removeItem("token");
+    navigate("/login");
   }
 
   return (

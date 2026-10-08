@@ -38,8 +38,8 @@ function Dashboard() {
   return (
     <div>
       {projects.map((project) => (
-        <div>
-          <ProjectCard key={project._id} project={project} />{" "}
+        <div key={project._id}>
+          <ProjectCard project={project} />{" "}
           {/*Project Card display from projectCard*/}
           <Link to={`/project/${project._id}`}>view project</Link>
         </div>
