@@ -7,10 +7,17 @@ type AuthProviderprops = {
 };
 
 function AuthProvider({ children }: AuthProviderprops) {
-  const [user, SetUser] = useState<User | null>(null); //Starts as no user logged in yet  = null;
+  const [user, setUser] = useState<User | null>(null); //Starts as no user logged in yet  = null;
+
+  //login
+  function login(userData: User) {
+    setUser(userData);
+  }
 
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, login }}>
+      {children}
+    </AuthContext.Provider>
   );
 }
 
