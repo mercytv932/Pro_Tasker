@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getProjects, createProject } from "../services/projectApi";
 import type { Project } from "../types/project";
 import ProjectForm from "../components/ProjectForm";
+import ProjectCard from "../components/ProjectCard";
 function Dashboard() {
   const [projects, setProjects] = useState<Project[]>([]); //loadProjects function state
 
@@ -36,14 +37,14 @@ function Dashboard() {
 
   return (
     <div>
+      
       {projects.map((project) => (
-        <div key={project._id}>
-          <h2>{project.name}</h2>
-          <p>{project.description}</p>
-          <Link to={`/project/${project._id}`}>view project</Link>{" "}
-          {/*go to project's page to show project with this id*/}
+        <div>
+          <ProjectCard key={project._id} project={project} /> {/*Project Card display from projectCard*/}
+          <Link to={`/project/${project._id}`}>view project</Link>
         </div>
       ))}
+      {/* Project create form from ProjctForm */}
       <ProjectForm
         projectName={projectName}
         setProjectName={setProjectName}
