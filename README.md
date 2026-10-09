@@ -10,8 +10,7 @@ Pro-Tasker is a project management app I built to help me stay organized and kee
 - Create, view, edit, and delete projects
 - Create, view, edit, and delete tasks inside projects
 - Protect pages with login
-- Only let users manage their own projects and tasks
-- Works on both phone and computer
+- Only let users manage their own projects and tasks(Authorization)
 
 ## Tech Stack
 
