@@ -40,18 +40,10 @@ Pro-Tasker is a project management app I built to help me stay organized and kee
 5. The user adds and manages tasks in that project.
 6. The backend checks if the user owns the project before letting them do anything.
 
-## Run It Locally
 
 ### Requirements
 
-- Node.js and npm
-- MongoDB
-- Git
-
-### 1. Clone the repository
-
-git clone https://github.com/mercytv932/Pro_Tasker.git
-cd Pro_Tasker
+### 1. Clone the repository : git clone https://github.com/mercytv932/Pro_Tasker.gitcd Pro_Tasker
 
 ### 2. Set up the backend
 
@@ -66,13 +58,7 @@ PORT=3001
 
 Replace the sample values with your own info. Don’t upload your real secret to GitHub.
 
-Start the backend:
-
-npm start
-
-If there is no start script, use:
-
-node server.js
+Start the backend:   node server.js
 
 ### 3. Set up the frontend
 
@@ -113,15 +99,14 @@ Then open the local URL in your browser. Usually it is http://localhost:5173.
 - PUT /api/tasks/:taskId - Update a task
 - DELETE /api/tasks/:taskId - Delete a task
 
-Protected routes need a valid JWT in the Authorization header.
 
 ## What I Learned
 
-This project helped me learn how to connect a React frontend to an Express backend, work with MongoDB, build authentication and permissions, create CRUD features, and deploy a full-stack app.
+This project helped me learn how to connect a React and Express backend, work with MongoDB, build authentication and permissions, create CRUD features, and deploy a fully functioning full-stack application.
 
 ## Future Improvements
 
-- Add a nicer header and footer
+- Add a nice header and footer
 - Add a light and dark mode switch
 - Add due dates and priority levels for tasks
 - Add search for projects
