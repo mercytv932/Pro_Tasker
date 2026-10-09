@@ -2,8 +2,11 @@ import { useContext, useState } from "react";
 import { type SubmitEvent } from "react";
 import { registerUser } from "../services/authApi";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
