@@ -37,6 +37,10 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
+      <header className=".dashboard-header">
+        <h1>TaskFlow</h1>
+        <p>Organize your work and keep track of yourtasks.</p>
+      </header>
       {projects.map((project) => (
         <div className="project-item" key={project._id}>
           <ProjectCard project={project} />{" "}
