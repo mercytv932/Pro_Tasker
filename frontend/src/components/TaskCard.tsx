@@ -20,7 +20,7 @@ function TaskCard({
   task,
   deleteTaskButton,
   startEditingTask,
-  editTaskButton,
+  editTaskButton, //save
   editingTaskId,
   editTaskTitle,
   setEditingTaskTitle,

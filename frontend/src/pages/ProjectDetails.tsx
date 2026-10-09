@@ -63,7 +63,7 @@ function ProjectDetails() {
   }, [id]);
 
   if (!project) {
-    return <p>Loading project</p>;
+    return <p>Add projects</p>;
   }
   async function editProjectButton() {
     if (!id) {
