@@ -24,8 +24,8 @@ function Navbar() {
         <Link to="/dashboard">Home</Link>
         <Link to="/dashboard">Dashboard</Link>
       </div>
-    
-      {/* <p className="navbar-welcome">Welcome, {user.username}</p> */}
+
+      <p className="navbar-welcome">Welcome, {user.username}</p>
 
       <button className="navbar-logout" onClick={logout}>
         Logout
