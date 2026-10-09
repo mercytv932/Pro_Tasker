@@ -2,9 +2,9 @@ import type { SubmitEvent } from "react";
 
 type ProjectFormProps = {
   projectName: string;
-  setProjectName: (value: string) => void; //function accepts a string and doesn't return anything
+  setProjectName: (value: string) => void; //function accepts a string and doesn't return anything.
   projectDescription: string;
-  setProjectDescription: (value: string) => void; //function accepts a string and doesn't return anything
+  setProjectDescription: (value: string) => void; //function accepts a string and doesn't return anything.
   createProjectButton: (e: SubmitEvent) => void;
 };
 

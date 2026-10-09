@@ -108,6 +108,10 @@ button {
   border-bottom: 1px solid var(--border);
 }
 
+.navbar .container {
+  display: flex;
+}
+
 .navbar-brand {
   display: inline-flex;
   align-items: center;
@@ -210,6 +214,7 @@ button {
   gap: 20px;
   order: 2;
   width: 100%;
+  margin-left: 20px;
 }
 
 .navbar-links a {
