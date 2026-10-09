@@ -457,6 +457,19 @@ button {
     grid-template-columns: 1fr;
   }
 
+  /* dashboard header */
+  .dashboard-header {
+    margin-bottom: 2rem;
+  }
+
+  .dashboard-header h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .dashboard-header p {
+    color: #64748b;
+  }
+
   .project-details {
     padding: 20px;
   }
