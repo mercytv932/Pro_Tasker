@@ -106,10 +106,14 @@ This project helped me learn how to connect a React and Express backend, work wi
 
 ## Future Improvements
 
-- Add a nice header and footer
-- Add a light and dark mode switch
-- Add due dates and priority levels for tasks
-- Add search for projects
-- Add team members and shared project features
-- Add invites and roles for teams
-- Add better task sorting and filters
+1. Project Search and Filtering. Allow users to search for projects by name and filter results.
+
+2. Task Due Dates and Priority Levels. Let users assign due dates and priorities to tasks so they can organize their work and focus on important tasks.
+
+3. User Profile Management. Allow users to view and update their profile information, such as username, email, and password.
+
+4. Improved Form Validation and Error Messages. Add stronger input validation and clear messages to help users understand and correct errors.
+
+5. Delete Confirmation Dialogs. Ask users to confirm before deleting a project or task to prevent accidental deletion.
+
+6. Team Collaboration. Allow users to create teams and invite other users to join. Team members can share projects, manage tasks together, and collaborate instead of each user working only on their own projects.
