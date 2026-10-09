@@ -3,10 +3,7 @@
 
 Pro-Tasker is a project management app I built to help me stay organized and keep track of my projects and tasks in one place.
 
-## Live Demo
-
-https://pro-tasker-frontend-2tg4.onrender.com/login
-
+## Live Demo :  https://pro-tasker-frontend-2tg4.onrender.com/login
 ## Features
 
 - create an account and log in
