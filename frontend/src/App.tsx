@@ -8,7 +8,6 @@ import Navbar from "./components/Navbar";
 function App() {
   return (
     <>
-      <header className=".dashboard-header"></header>
       <Navbar />
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />}></Route>
