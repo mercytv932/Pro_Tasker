@@ -22,7 +22,6 @@ function Navbar() {
           </span>
         </Link>
         <div className="navbar-links">
-          <Link to="/dashboard">Home</Link>
           <Link to="/dashboard">Dashboard</Link>
         </div>
       </div>
