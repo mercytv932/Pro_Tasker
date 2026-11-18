@@ -2,12 +2,8 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 //1 Get projects from the backend/view all projects
 export async function getProjects() {
-  const token = localStorage.getItem("token"); //Save token so that projectAuth.ts can use it.
-
   const response = await fetch(`${API_URL}/api/projects`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    credentials: "include",
   });
 
   const data = await response.json(); //turns the JSON response "(getAllProjects)" to JavaScript value
@@ -21,13 +17,12 @@ export async function getProjects() {
 
 //2 Create a new project
 export async function createProject(name: string, description: string) {
-  const token = localStorage.getItem("token");
   const response = await fetch(`${API_URL}/api/projects`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify({ name, description }),
   });
 
@@ -39,13 +34,11 @@ export async function createProject(name: string, description: string) {
 }
 //Get a project/view one project
 export async function getProject(id: string) {
-  const token = localStorage.getItem("token");
-
   const response = await fetch(`${API_URL}/api/projects/${id}`, {
     headers: {
-      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
+    credentials: "include",
   });
 
   const data = await response.json();
@@ -62,14 +55,12 @@ export async function updateProject(
     description: string;
   },
 ) {
-  const token = localStorage.getItem("token");
-
   const response = await fetch(`${API_URL}/api/projects/${id}`, {
     method: "PUT",
     headers: {
-      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify(updatedData),
   });
 
@@ -81,12 +72,9 @@ export async function updateProject(
 }
 //Delete a project
 export async function deleteProject(id: string) {
-  const token = localStorage.getItem("token");
   const response = await fetch(`${API_URL}/api/projects/${id}`, {
     method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    credentials: "include",
   });
 
   const data = await response.json();
