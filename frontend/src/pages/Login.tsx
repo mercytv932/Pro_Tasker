@@ -36,8 +36,6 @@ function Login() {
       const data = await loginUser(currentEmail, currentPassword);
       login(data.user); //AuthProvider stores user as the currently logged in user.
 
-      localStorage.setItem("token", data.token);
-
       setSuccess("Login successful");
 
       navigate("/dashboard"); //when success navigate to dashboard page

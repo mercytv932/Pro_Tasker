@@ -48,7 +48,6 @@ function Register() {
       console.log(data);
 
       login(data.user);
-      localStorage.setItem("token", data.token);
 
       setSuccess("Account created successfully");
       navigate("/dashboard");

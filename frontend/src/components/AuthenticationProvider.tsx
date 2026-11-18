@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, type ReactNode } from "react";
 import AuthContext from "../context/AuthenticationContext";
+import { logoutUser } from "../services/authApi";
 import type { User } from "../types/user";
 
 type AuthProviderprops = {
@@ -18,10 +19,15 @@ function AuthProvider({ children }: AuthProviderprops) {
   }
 
   //log out
-  function logout() {
-    setUser(null);
-    localStorage.removeItem("token");
-    navigate("/login");
+  async function logout() {
+    try {
+      await logoutUser(); //Tells Node.js to clear the HttpOnly cookie
+    } catch (error) {
+      console.error("Error logging out:", error);
+    } finally {
+      setUser(null);
+      navigate("/login");
+    }
   }
 
   return (
