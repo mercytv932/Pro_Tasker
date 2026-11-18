@@ -79,4 +79,13 @@ const userLogin = async (req, res) => {
   }
 };
 
-module.exports = { userSignUp, userLogin };
+//User logout
+const userLogout = (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+  });
+  res.status(200).json({ message: "You successfully Logged out" });
+};
+module.exports = { userSignUp, userLogin, userLogout };
