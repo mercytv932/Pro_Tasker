@@ -18,12 +18,24 @@ function signToken(user) {
   );
 }
 
+//Helper to attach the JWT inside an HttpOnly cookie
+function sendTokenCookie(res, token) {
+  res.cookie("token", token, {
+    httpOnly: true, //Blocks JavaScript/XSS from reading the screen
+    secure: process.env.NODE_ENV === "production", //HTTPS only in production
+    sameSite: "lax", //helps prevnt CSRF attacks
+    maxAge: 7 * 24 * 60 * 1000, //Expires in 7 days
+  });
+}
+
 // User signUp
 const userSignUp = async (req, res) => {
   try {
     const user = await User.create(req.body);
-
     const token = signToken(user);
+
+    sendTokenCookie(res, token); //Set cookie instead of sending token in JSON
+
     res.status(201).json({
       token,
       user: {
@@ -52,7 +64,9 @@ const userLogin = async (req, res) => {
 
     //If all fields correct, create a token
     const token = signToken(user);
-    res.status(201).json({
+    sendTokenCookie(res, token); //Set cookie instead of sending token in JSON
+
+    res.status(200).json({
       token,
       user: {
         _id: user._id,
