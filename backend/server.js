@@ -10,15 +10,21 @@ const PORT = process.env.PORT || 3001;
 const userRouter = require("./routes/auth.js");
 const projectRouter = require("./routes/project.js");
 const taskRouter = require("./routes/task.js");
-const cookieParser = require("cookie-parser");
 
 mongoDbConnection();
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigins,
     credentials: true,
   }),
 );
+
 app.use(express.json());
 app.use(cookieParser());
 

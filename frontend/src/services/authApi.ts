@@ -20,7 +20,7 @@ export async function registerUser(
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Failed to create account");
+    throw new Error("Failed to create account");
   }
   return data;
 }

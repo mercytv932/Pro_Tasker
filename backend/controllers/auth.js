@@ -1,6 +1,9 @@
 const User = require("../models/User.js");
 const jwt = require("jsonwebtoken");
 
+
+
+
 // Create signToken function
 function signToken(user) {
   if (!process.env.JWT_SECRET) {
