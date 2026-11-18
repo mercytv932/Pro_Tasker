@@ -39,7 +39,7 @@ const updateTask = async (req, res) => {
     if (!task) {
       return res.status().json({ message: "Task not found" });
     }
-    const project = await Project.findById(task.project); //Find the project that owns this task
+    const project = await Project.findById(task.project); 
     if (project && project.user.equals(req.user._id)) {
       const updatedTask = await Task.findByIdAndUpdate(taskId, req.body, {
         new: true,
