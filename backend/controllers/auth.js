@@ -1,8 +1,12 @@
 const User = require("../models/User.js");
 const jwt = require("jsonwebtoken");
 
-
-
+//shared cookie settings for both setting and clearing the cookie
+const cookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+};
 
 // Create signToken function
 function signToken(user) {
@@ -24,9 +28,7 @@ function signToken(user) {
 //Helper to attach the JWT inside an HttpOnly cookie
 function sendTokenCookie(res, token) {
   res.cookie("token", token, {
-    httpOnly: true, //Blocks JavaScript/XSS from reading the screen
-    secure: process.env.NODE_ENV === "production", //HTTPS only in production
-    sameSite: "lax", //helps prevnt CSRF attacks
+    cookieOptions,
     maxAge: 7 * 24 * 60 * 1000, //Expires in 7 days
   });
 }
@@ -84,11 +86,7 @@ const userLogin = async (req, res) => {
 
 //User logout
 const userLogout = (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-  });
+  res.clearCookie("token", cookieOptions);
   res.status(200).json({ message: "You successfully Logged out" });
 };
 module.exports = { userSignUp, userLogin, userLogout };
